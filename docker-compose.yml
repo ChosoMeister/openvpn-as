@@ -1,0 +1,21 @@
+version: "2.1"
+services:
+  openvpn-as:
+    build:
+      context: . 
+      dockerfile: Dockerfile
+    #container_name: openvpn-as1
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    cap_add:
+      - NET_ADMIN
+      - MKNOD
+    ports:
+      - "943:943"
+      - "443:443"
+      - "1194:1194/udp"
+      - "14810:14810/udp"
+      - "14810:14810"
+    volumes:
+      - /root/openvpn:/openvpn  # 映射OpenVPN数据卷
+    restart: unless-stopped
