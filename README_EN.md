@@ -6,7 +6,7 @@ This project is based on OpenVPN Access Server 2.13.1, with modifications to byp
 
 **⚠️ Disclaimer:**
 - Method sourced from [oskr.cn](https://oskr.cn/archives/openvpnaccessserver294po-jie-ren-shu-xian-zhi)
-- For educational and learning purposes only
+- For educational purposes only
 - Not intended for commercial use
 - Users are responsible for any consequences
 
