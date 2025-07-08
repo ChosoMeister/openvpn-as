@@ -1,133 +1,143 @@
 # OpenVPN Access Server - Unlimited Edition
 
-### 🔍 Project Description
+### 🔍 Overview
 
-This project is based on OpenVPN Access Server 2.13.1, with modifications to bypass connection limits by patching the license validation mechanism.
+A containerized deployment solution for OpenVPN Access Server 2.13.1 with license validation modifications to remove connection limits, supporting up to 2048 concurrent connections.
 
-**⚠️ Disclaimer:**
-- Method sourced from [oskr.cn](https://oskr.cn/archives/openvpnaccessserver294po-jie-ren-shu-xian-zhi)
-- For educational purposes only
-- Not intended for commercial use
-- Users are responsible for any consequences
+### ⚠️ Important Notice
 
-### 🚀 Quick Start
+> **For Educational and Research Purposes Only**
+> 
+> - Technical solution referenced from [oskr.cn](https://oskr.cn/archives/openvpnaccessserver294po-jie-ren-shu-xian-zhi)
+> - Strictly prohibited for commercial use or production environments
+> - Please comply with local laws and software license agreements
+> - Users assume all responsibility and risks
 
-#### Prerequisites
-- Docker
-- Docker Compose
-- Linux system (Ubuntu/CentOS recommended)
+### 🚀 Quick Deployment
 
-#### Installation Steps
+#### System Requirements
 
-1. **Clone Repository**
-   ```bash
-   git clone <repository-url>
-   cd openvpn-as
-   ```
+| Component | Version | Description |
+|-----------|---------|-------------|
+| Docker | 20.10+ | Container runtime |
+| Docker Compose | 1.29+ | Service orchestration |
+| OS | Linux | Ubuntu 20.04+ / CentOS 8+ recommended |
+| Memory | 512MB+ | 1GB+ recommended |
+| Storage | 2GB+ | For configs and logs |
 
-2. **Configure (Optional)**
-   Edit `docker-compose.yml`:
-   ```yaml
-   ports:
-     - "943:943"    # Web UI port
-     - "443:443"    # HTTPS port
-     - "1194:1194/udp"  # OpenVPN UDP port
-   volumes:
-     - /your/path:/openvpn  # Change to your data storage path
-   ```
-
-3. **Start Services**
-   ```bash
-   docker-compose up -d
-   ```
-
-4. **Access Management Interface**
-   - Admin UI: `https://your-server-ip:943/admin`
-   - User UI: `https://your-server-ip:943`
-   - Default username: `openvpn`
-   - Default password: Check container logs
-
-### 📊 Features
-
-- ✅ Unlimited connections (up to 2048 concurrent)
-- ✅ Built on official Docker image
-- ✅ UDP/TCP protocol support
-- ✅ Web management interface
-- ✅ User certificate management
-- ✅ Traffic statistics
-
-### 🔧 Common Commands
+#### One-Click Deploy
 
 ```bash
-# Check service status
-docker-compose ps
+# 1. Clone repository
+git clone https://github.com/your-repo/openvpn-as.git
+cd openvpn-as
 
-# View logs
-docker-compose logs -f
+# 2. Create data directory
+sudo mkdir -p /opt/openvpn-data
+sudo chown $USER:$USER /opt/openvpn-data
+
+# 3. Start services
+docker-compose up -d
+
+# 4. Get initial password
+docker-compose logs openvpn-as | grep "Initial"
+```
+
+### 🌐 Access Services
+
+| Service | URL | Description |
+|---------|-----|-------------|
+| Admin Panel | `https://your-server-ip:943/admin` | System config & user management |
+| User Portal | `https://your-server-ip:943` | Download client configs |
+| Default Account | `openvpn` / `check logs for password` | Administrator account |
+
+```bash
+# Get initial admin password
+docker-compose logs openvpn-as | grep "Initial Admin UI user password"
+```
+
+### 📊 Key Features
+
+| Feature | Status | Description |
+|---------|--------|-------------|
+| 🚀 **Unlimited Connections** | ✅ | Up to 2048 concurrent connections |
+| 🛡️ **Secure Protocols** | ✅ | UDP/TCP dual protocol support |
+| 🖥️ **Web Management** | ✅ | Complete web administration interface |
+| 📱 **Multi-Platform** | ✅ | Windows/macOS/Linux/iOS/Android support |
+| 📊 **Traffic Analytics** | ✅ | Detailed connection and traffic monitoring |
+| 🔐 **Certificate Management** | ✅ | Auto client certificate generation |
+| 🌍 **Load Balancing** | ✅ | Multi-instance load balancing support |
+| 📈 **High Availability** | ✅ | Auto-restart and health checks |
+
+### 🔧 Operations & Management
+
+#### Service Control
+
+```bash
+# Start services
+docker-compose up -d
 
 # Stop services
 docker-compose down
 
-# Restart services
-docker-compose restart
+# Restart specific service
+docker-compose restart openvpn-as
 
-# Enter container
+# Check service status
+docker-compose ps
+
+# View real-time logs
+docker-compose logs -f openvpn-as
+
+# Enter container for debugging
 docker-compose exec openvpn-as bash
 ```
 
-### 🛠️ Project Structure
+#### Data Backup
 
+```bash
+# Backup configuration data
+sudo tar -czf openvpn-backup-$(date +%Y%m%d).tar.gz /opt/openvpn-data
+
+# Restore configuration data
+sudo tar -xzf openvpn-backup-YYYYMMDD.tar.gz -C /
 ```
-openvpn-as/
-├── docker-compose.yml  # Docker Compose configuration
-├── Dockerfile         # Custom Docker image build file
-├── uprop.py          # License patch script
-├── README.md         # Project documentation
-└── README_EN.md      # English documentation
+
+#### Troubleshooting
+
+<details>
+<summary><strong>Q: Forgot admin password?</strong></summary>
+
+```bash
+# Reset admin password
+docker-compose exec openvpn-as /usr/local/openvpn_as/scripts/sacli --user openvpn --new_pass newpassword123 SetLocalPassword
 ```
+</details>
 
-### 🔒 Security Notes
+<details>
+<summary><strong>Q: How to add new users?</strong></summary>
 
-- Change default admin password immediately after first login
-- Use strong passwords for VPN user accounts
-- Configure firewall rules appropriately
-- Regularly update the base Docker image
-- Monitor connection logs for suspicious activity
+```bash
+# Add user via command line
+docker-compose exec openvpn-as /usr/local/openvpn_as/scripts/sacli --user username --new_pass password123 SetLocalPassword
+```
+</details>
 
-### 🐛 Troubleshooting
+### � Resources
 
-#### Common Issues
+| Resource | Link | Description |
+|----------|------|-------------|
+| Official Docs | [OpenVPN AS Docs](https://openvpn.net/access-server/) | Complete product documentation |
+| Docker Hub | [openvpn/openvpn-as](https://hub.docker.com/r/openvpn/openvpn-as) | Official Docker image |
+| Client Downloads | [OpenVPN Connect](https://openvpn.net/client-connect-vpn-for-windows/) | Multi-platform clients |
+| Community | [OpenVPN Forums](https://forums.openvpn.net/) | Technical support forums |
 
-1. **Container fails to start**
-   ```bash
-   # Check logs
-   docker-compose logs openvpn-as
-   
-   # Verify TUN device availability
-   ls -la /dev/net/tun
-   ```
+### 📄 License
 
-2. **Cannot access web interface**
-   - Verify ports are not blocked by firewall
-   - Check if ports are already in use: `netstat -tlnp | grep :943`
+This project is for educational and research purposes only. Please adhere to these principles:
 
-3. **VPN connection fails**
-   - Ensure UDP port 1194 is open
-   - Check client configuration file
-   - Verify server IP address in client config
-
-#### Getting Help
-
-- Check container logs: `docker-compose logs -f`
-- Verify network connectivity
-- Review OpenVPN Access Server documentation
-
-### 📖 References
-
-- [Official Docker Hub Project](https://hub.docker.com/r/openvpn/openvpn-as)
-- [OpenVPN Access Server Documentation](https://openvpn.net/access-server/)
-- [Docker Compose Documentation](https://docs.docker.com/compose/)
-
-### 📜 License
-
-This project is for educational purposes only. Please respect the original OpenVPN Access Server license terms and use this modification responsibly.
+- ✅ Personal learning and research
+- ✅ Technical exchange and sharing
+- ❌ Commercial use
+- ❌ Production deployment
+- ❌ Violation of software licenses
