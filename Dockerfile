@@ -1,5 +1,5 @@
 # 使用openvpn/openvpn-as作为基准镜像
-FROM openvpn/openvpn-as:2.13.1-d8cdeb9c-Ubuntu22
+FROM openvpn/openvpn-as:2.14.3-5936bcd7-Ubuntu24
 
 # 将当前目录下的uprop.py文件复制到容器中的指定位置
 COPY uprop.py /path/to/pyovpn/lic/uprop.py
