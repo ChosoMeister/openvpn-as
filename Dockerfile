@@ -12,8 +12,8 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # 复制egg文件到当前目录并解压
-RUN cp /usr/local/openvpn_as/lib/python/pyovpn-2.0-py3.10.egg /root/ \
-    && unzip -q /root/pyovpn-2.0-py3.10.egg -d /root/
+RUN cp /usr/local/openvpn_as/lib/python/pyovpn-2.0-py3.12.egg /root/ \
+    && unzip -q /root/pyovpn-2.0-py3.12.egg -d /root/
 
 # 重命名uprop.pyc文件
 RUN mv /root/pyovpn/lic/uprop.pyc /root/pyovpn/lic/uprop2.pyc
@@ -25,10 +25,10 @@ RUN python3 -O -m compileall /root/pyovpn/lic/uprop.py \
     && mv /root/pyovpn/lic/__pycache__/uprop.*.pyc /root/pyovpn/lic/uprop.pyc
 
 # 重新压缩egg文件
-RUN cd /root && zip -rq pyovpn-2.0-py3.10.egg pyovpn EGG-INFO common
+RUN cd /root && zip -rq pyovpn-2.0-py3.12.egg pyovpn EGG-INFO common
 
 # 将修改后的egg文件移动回原来的位置
-RUN mv /root/pyovpn-2.0-py3.10.egg /usr/local/openvpn_as/lib/python/pyovpn-2.0-py3.10.egg
+RUN mv /root/pyovpn-2.0-py3.12.egg /usr/local/openvpn_as/lib/python/pyovpn-2.0-py3.12.egg
 
 # 清除临时文件
 RUN rm -rf /root/pyovpn
