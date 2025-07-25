@@ -2,7 +2,7 @@
 
 ### 🔍 Overview
 
-A containerized deployment solution for OpenVPN Access Server 2.13.1 with license validation modifications to remove connection limits, supporting up to 2048 concurrent connections.
+A containerized deployment solution for OpenVPN Access Server 2.14.3 with license validation modifications to remove connection limits, supporting up to 2048 concurrent connections.
 
 ### ⚠️ Important Notice
 
