@@ -145,6 +145,3 @@ docker-compose exec openvpn-as /usr/local/openvpn_as/scripts/sacli --user userna
 - ❌ استقرار در محیط تولیدی
 - ❌ نقض مجوز نرم‌افزار
 
----
-اگر ساختار یا لحن رسمی‌تری نیاز دارید، لطفاً اطلاع دهید!
-
