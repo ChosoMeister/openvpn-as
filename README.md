@@ -4,7 +4,7 @@
 [![OpenVPN AS](https://img.shields.io/badge/OpenVPN%20AS-2.13.1-green.svg)](https://openvpn.net/access-server/)
 [![License](https://img.shields.io/badge/License-Educational%20Only-red.svg)](#disclaimer)
 
-[English](#english) | [中文](#中文)
+[English](#english) | [Farsi](README_FA.md) | [中文](#中文)
 
 ---
 
