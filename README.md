@@ -4,7 +4,7 @@
 [![OpenVPN AS](https://img.shields.io/badge/OpenVPN%20AS-2.13.1-green.svg)](https://openvpn.net/access-server/)
 [![License](https://img.shields.io/badge/License-Educational%20Only-red.svg)](#disclaimer)
 
-[English](#english) | [中文](#中文)
+[English](#english) | [Farsi](README_FA.md) | [中文](#中文)
 
 ---
 
@@ -218,7 +218,7 @@ ports:
 
 ### 🔍 Overview
 
-A containerized deployment solution for OpenVPN Access Server 2.13.1 with license validation modifications to remove connection limits, supporting up to 2048 concurrent connections.
+A containerized deployment solution for OpenVPN Access Server 2.14.3 with license validation modifications to remove connection limits, supporting up to 2048 concurrent connections.
 
 ### ⚠️ Important Notice
 
